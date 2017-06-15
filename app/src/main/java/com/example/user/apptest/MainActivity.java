@@ -1,5 +1,6 @@
 package com.example.user.apptest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,16 +17,17 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private final String tag = "my_activity";
+    private final String data_id = "data_id";
+    int i = 0;
 
-    int i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editText = (EditText) findViewById(R.id.editText2);
-        Log.d(tag, "old value: " + editText.getText());
-        Button button = (Button)findViewById(R.id.button1);
-        button.setOnClickListener(listener);
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(listener);
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(listener2);
 
     }
 
@@ -64,12 +66,20 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            TextView textView = (TextView)findViewById(R.id.textView3);
-            i++;
-            textView.setText(i+ " taps");
+            Intent intent = new Intent(MainActivity.this, BestActivity.class);
+            intent.putExtra(data_id,i+"");
+            startActivity(intent);
         }
     };
 
+    View.OnClickListener listener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            TextView textView = (TextView) findViewById(R.id.textView3);
+            i++;
+            textView.setText(i+" taps");
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
